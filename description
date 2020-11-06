@@ -1,0 +1,105 @@
+External commands:
+
+1) cat
+    flags handled: -n:  display line number with each line
+                   -b:  display line number with each line but do not count empty lines
+
+2) date
+    flags handled: -u: display date in utc timezone
+                   -R: display date in rfc 5322 format
+
+3) ls
+    flags handled: -i:  display inode number of each file
+                   -1: display files vertically
+
+4) rm
+    flags handled: -v:  explain what is being done
+                   -i:  prompt user before deleting
+
+5) mkdir
+    flags handled: -p:  make parent directory if not present
+                   -v:  explain what is being done
+
+Internal Commands:
+
+1) exit
+    no flags
+
+2) echo
+    flags handled: -E: do not handle escape sequences
+                   -n: do not display newline
+
+3) pwd
+    flags handled: -P: use physical directory without following symbolic links
+                   -L: is default behaviour
+                    
+
+4) history
+    flags handled: -c: clears history
+                   -w: write history to external history file
+                    
+5) cd
+    flags handled: -P:  use physical directory without following symbolic links
+                   -e:  if the -P option is supplied, and the current working directory cannot be determined successfully, exit with a non-zero status
+                    
+
+System calls used:
+
+1)_exit(int status): exiting the child program with given status
+2)chdir(char* str):  to change the current working directory
+3)getcwd(): to get the current working directory
+4)execl: to execute external binary in the child process
+5)fork: to create child process
+6)scandir: to read directory's content
+7)mkdir: to create a new folder
+8)read: to read file with given file descriptor
+9)open: to open a file
+10)unlink: to remove files
+11)wait: wait for the child process to complete
+12)close: close the file descriptor
+
+
+All errors for above mentioned system call are handled and printed. Also shows "Wrong flag entered" on entering an option that is not implemented.
+Handles default behaviour of cd to change to home directory if not path specified.
+Order of flags do not matter
+
+
+Commands for testing:
+
+cat cd-help.txt echo-help.txt
+cat -n cd-help.txt
+cat -b cd-help.txt
+date
+date -R
+date -u
+ls
+ls -i
+ls -1
+mkdir -v hello
+ls
+mkdir hello2/hel
+mkdir -p hello2/hel
+cd hello2
+pwd
+cd hel
+pwd
+cd ..
+cd ..
+ls
+rm hello
+rm - -i hello.txt
+rm -v -i hello.txt
+rm -v -i history.txt
+ls
+pwd -g
+echo hello
+echo -n -E hello
+pwd -P
+history
+history -w
+
+Screenshots while running given Screenshots directory
+
+Instructions to run:
+make
+./task2
